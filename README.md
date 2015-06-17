@@ -8,10 +8,12 @@ Make sure to have a `public` directory inside your project root directory.
 Add the package to your project with `meteor add herrhelms:meteor-vcards`.
 
 ### basic usage
+This package exposes two UI helpers you can include anywhere in your project.
 
-This package exposes two template helpers you can include anywhere in your project.
+ - `{{vCardGenerateButton}}` button to generate a new .vcard file on the fly.
+    The file will be called 'vcard-CURRENT_TIMESTAMP.vcf' and resides in your `/public` directory.
 
- - {{vCardGenerateButton}} - for generating a new .vcf file on the fly ('vcard-CURRENT_TIMESTAMP.vcf')
- - {{vCardDownloadLink}} - for a reactive div with link to the generated file to download.
+ - `{{vCardDownloadLink}}` div element as placeholder for the link to download the generated vcard.
 
-vCard content can be injected at any time by a `new ReactiveDict`  ...
+### vcard content
+The content of the vCard can be injected at any time by a `new ReactiveDict`  ...
