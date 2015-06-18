@@ -3,7 +3,7 @@ Serving [.vcard files](https://en.wikipedia.org/wiki/VCard) (vCards) to download
 
 ### installation
 
-Make sure to have a `public` directory inside your project root directory.
+Make sure to have a `/public` directory inside your project root directory.
 
 Add the package to your project with `meteor add herrhelms:meteor-vcards`.
 
@@ -16,4 +16,17 @@ This package exposes two UI helpers you can include anywhere in your project.
  - `{{vCardDownloadLink}}` div element as placeholder for the link to download the generated vcard.
 
 ### vcard content
-The content of the vCard can be injected at any time by a `new ReactiveDict`  ...
+~~The content of the vCard can be injected at any time by a `new ReactiveDict`  ...~~
+
+for now this is hard-coded
+
+### example integration
+Dummy integration in yourtemplate.html
+
+```HTML
+    {{vCardGenerateButton}}
+    <fieldset>
+        <legend>Download vCard</legend>
+        {{vCardDownloadLink}}
+    </fieldset>
+```
