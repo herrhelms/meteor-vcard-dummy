@@ -3,7 +3,7 @@ Serving [.vcard files](https://en.wikipedia.org/wiki/VCard) (vCards) to download
 
 ### installation
 
-Make sure to have a `/public` directory inside your project root directory.
+Make sure to have a `/private` directory inside your project root directory.
 
 Add the package to your project with `meteor add herrhelms:meteor-vcards`.
 
@@ -11,7 +11,7 @@ Add the package to your project with `meteor add herrhelms:meteor-vcards`.
 This package exposes two UI helpers you can include anywhere in your project.
 
  - `{{vCardGenerateButton}}` button to generate a new .vcard file on the fly.
-    The file will be called 'vcard-CURRENT_TIMESTAMP.vcf' and resides in your `/public` directory.
+    The file will be called 'vcard-CURRENT_TIMESTAMP.vcf' and resides in your `/private` directory.
 
  - `{{vCardDownloadLink}}` div element as placeholder for the link to download the generated vcard.
 
