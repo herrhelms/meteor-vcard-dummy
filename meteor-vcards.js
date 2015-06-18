@@ -77,11 +77,11 @@ if (Meteor.isServer) {
             where: 'server',
             action: function() {
                 var filename = this.params.filename;
-                var filePath = process.env.PWD + '/packages/meteor-vcards/vcards/' + filename;
+                var filePath = process.env.PWD + '/private/' + filename;
                 var data = fs.readFileSync(filePath);
                 this.response.writeHead(200, {
                     'Cache-Control': 'private, max-age=0, no-cache, must-revalidate, post-check=0, pre-check=0',
-                    'Content-Type': 'text/x-vCard',
+                    'Content-Type': 'text/x-vcard',
                     'Content-Disposition': 'attachment; filename= "' + filename + '";'
                 });
                 this.response.write(data);
@@ -93,12 +93,12 @@ if (Meteor.isServer) {
     Meteor.methods({
         buildVcard: function(content) {
             var filename = 'vcard-' + new Date().getTime() + '.vcf';
-            var filePath = process.env.PWD + '/packages/meteor-vcards/vcards/' + filename;
+            var filePath = process.env.PWD + '/private/' + filename;
             fs.writeFileSync(filePath, content, 'binary');
             return '/download/' + filename;
         },
         removeVcard: function(filename) {
-            var filePath = process.env.PWD + '/packages/meteor-vcards/vcards/' + filename;
+            var filePath = process.env.PWD + '/private/' + filename;
             Meteor.setTimeout(function () {
                 fs.unlinkSync(filePath);
             }, 1000);
