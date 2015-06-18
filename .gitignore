@@ -1,2 +1,3 @@
-vcards/*
+vcards/.DS_Store
 .eslintrc
+.gitignore
