@@ -1,9 +1,17 @@
-
 if (Meteor.isClient) {
-
-
     var defaultText = 'Press generate to get your vcard';
     var defaultButtonText = 'Generate';
+
+    var first = 'John';
+    var last = 'Doe';
+    var email = 'john.doe@emailprovider.com';
+
+    var content = 'BEGIN:VCARD\n' +
+    'VERSION:3.0\n' +
+    'N:' + first + ' ' + last + ';;;;\n' +
+    'EMAIL;type=INTERNET;type=pref:' + email + '\n' +
+    'PROFILE:VCARD\n' +
+    'END:VCARD\n';
 
     Meteor.startup(function() {
         Router.route('/', {
@@ -13,13 +21,14 @@ if (Meteor.isClient) {
 
     var dlStatusTxt = new ReactiveVar();
     var dlButtonStatus = new ReactiveVar();
+
     dlStatusTxt.set(defaultText);
     dlButtonStatus.set(false);
 
     UI.registerHelper('vCardGenerateButton', function() {
         var button = document.createElement('button');
         button.disabled = dlButtonStatus.get();
-        button.setAttribute('class', 'btn btn-default btn-generate');
+        button.setAttribute('class', 'btn btn-default generate-vcard');
         button.innerHTML = defaultButtonText;
         var wrapper = document.createElement('div');
         wrapper.appendChild(button);
@@ -31,23 +40,14 @@ if (Meteor.isClient) {
     });
 
     UI.body.events({
-        'click .btn-generate': function(evt, tpl) {
+        'click .generate-vcard': function(evt, tpl) {
             dlStatusTxt.set('Generating...');
 
             // simple ingration for now...
-            var first = 'Nameric';
-            var last = 'Namesson';
-            var email = 'nameric.namesson@emailprovider.com';
-
-            var content = 'BEGIN:VCARD\n' +
-            'VERSION:3.0\n' +
-            'N:' + first + ' ' + last + ';;;;\n' +
-            'EMAIL;type=INTERNET;type=pref:' + email + '\n' +
-            'PROFILE:VCARD\n' +
-            'END:VCARD\n';
-
             Meteor.call('buildVcard', content, function(error, result) {
                 if (!error && result) {
+
+                    // adding some timeout here to be certain the physical file is available on server
                     Meteor.setTimeout(function() {
                         var txt = '<a href="' + result + '" class="download-vcard">download vcard<a>';
                         dlStatusTxt.set(txt);
